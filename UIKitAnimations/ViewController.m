@@ -50,10 +50,16 @@
     CGAffineTransform mueve = CGAffineTransformMakeTranslation(600, 0);
     CGAffineTransform compuesta = CGAffineTransformConcat(giro, mueve);
     
+    CGAffineTransform escala = CGAffineTransformIdentity;
+    escala = CGAffineTransformConcat( escala, CGAffineTransformMakeTranslation(50, 50));
+    escala = CGAffineTransformConcat( escala, CGAffineTransformMakeScale(3.0, 3.0));
+    escala = CGAffineTransformConcat( escala, CGAffineTransformMakeTranslation(-50, -50));
+    
     [UIView animateWithDuration:1.0
                      animations:^{
                          self.rojo.center = CGPointMake(self.view.bounds.size.width-120, self.rojo.center.y);
-                         self.amarillo.alpha = 0.0;
+                         self.amarillo.alpha = 0.2;
+                         self.amarillo.transform = escala;
                          self.azul.transform = compuesta;
                      }];
 }
