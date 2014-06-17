@@ -38,9 +38,16 @@
 }
 
 - (IBAction)doAnima:(id)sender {
-    [UIView performSystemAnimation:UISystemAnimationDelete onViews:@[self.rojo] options:0 animations:^{
-        self.rojo.alpha = 0.0;
-    } completion:nil];
+    self.rojo.transform = CGAffineTransformMakeRotation(M_PI);
+    [UIView animateWithDuration:1.0
+                          delay:0.0
+         usingSpringWithDamping:.4
+          initialSpringVelocity:.8
+                        options:0
+                     animations:^{
+                         self.rojo.center = CGPointMake(self.view.bounds.size.width-120, self.rojo.center.y);
+                         self.rojo.transform = CGAffineTransformIdentity;
+                     } completion:nil];
 }
 
 @end
