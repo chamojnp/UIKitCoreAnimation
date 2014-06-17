@@ -38,18 +38,21 @@
 }
 
 - (IBAction)doAnima:(id)sender {
-    float duracion = 2.0;
+    float duracion = 1.0;
     [UIView animateKeyframesWithDuration:duracion
                                    delay:0.0
-                                 options:0
+                                 options:UIViewKeyframeAnimationOptionCalculationModeCubicPaced
                               animations:^{
-                                  for (int a = 0; a<3; a++) {
-                                      [UIView addKeyframeWithRelativeStartTime:a/3.0
-                                                              relativeDuration:1/3.0
-                                                                    animations:^{
-                                                                        self.rojo.transform = CGAffineTransformMakeRotation((a+1)*M_PI/2.0);
-                                                                    }];
-                                  }
+                                  [UIView addKeyframeWithRelativeStartTime:0
+                                                          relativeDuration:.5
+                                                                animations:^{
+                                                                    self.rojo.center = CGPointMake(self.view.bounds.size.width-120, self.rojo.center.y);
+                                                                }];
+                                  [UIView addKeyframeWithRelativeStartTime:.5
+                                                          relativeDuration:.5
+                                                                animations:^{
+                                                                    self.rojo.center = CGPointMake(self.view.bounds.size.width-120, self.rojo.center.y+40);
+                                                                }];
                               } completion:nil];
 }
 
