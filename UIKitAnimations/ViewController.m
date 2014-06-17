@@ -12,6 +12,7 @@
 @property (weak, nonatomic) IBOutlet UIView *vista;
 @property (weak, nonatomic) IBOutlet UIView *subvista;
 @property (weak, nonatomic) IBOutlet UILabel *label;
+@property (weak, nonatomic) IBOutlet UIView *vista2;
 
 @end
 
@@ -21,7 +22,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    self.vista2.hidden = YES;
     
 }
 
@@ -33,13 +34,12 @@
 }
 
 - (IBAction)doAnima:(id)sender {
-    [UIView transitionWithView:self.vista
-                      duration:1.0
-                       options:UIViewAnimationOptionTransitionFlipFromTop
-                    animations:^{
-                        [self.subvista removeFromSuperview];
-                        self.label.hidden = YES;
-                    } completion:nil];
+    [UIView transitionFromView:self.subvista toView:self.vista2 duration:1.0
+                       options:UIViewAnimationOptionTransitionFlipFromTop|UIViewAnimationOptionShowHideTransitionViews|UIViewAnimationOptionAutoreverse
+                    completion:^(BOOL finished) {
+                        self.subvista.hidden = NO;
+                        self.vista2.hidden = YES;
+                    }];
 
 }
 
