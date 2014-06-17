@@ -7,11 +7,13 @@
 //
 
 #import "ViewController.h"
+#import "MiVista.h"
 
 @interface ViewController ()
 @property (nonatomic, strong) UIView* rojo;
 @property (nonatomic, strong) UIView* amarillo;
 @property (nonatomic, strong) UIView* azul;
+@property (nonatomic, strong) MiVista* vista;
 @end
 
 @implementation ViewController
@@ -36,6 +38,11 @@
     self.amarillo.center = CGPointMake(120, 240);
     self.azul.center = CGPointMake(120, 360);
     
+    self.vista = [[MiVista alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+    self.vista.center = CGPointMake(120, 480);
+    self.vista.backgroundColor = [UIColor orangeColor];
+    [self.view addSubview:self.vista];
+    
 }
 
 
@@ -49,9 +56,9 @@
 
     [UIView animateWithDuration:1.0
                           delay:0.0
-                        options:UIViewAnimationOptionRepeat|UIViewAnimationOptionAutoreverse
+                        options:UIViewAnimationOptionLayoutSubviews
                      animations:^{
-                         self.rojo.center = CGPointMake(self.view.bounds.size.width-120, self.rojo.center.y);
+                         self.vista.frame = CGRectMake(120, 480, 200, 200);
                      }
                      completion:nil
      ];

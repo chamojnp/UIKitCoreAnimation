@@ -21,6 +21,7 @@
 		8C2EA0801950909900E240FA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C2EA0621950909900E240FA /* UIKit.framework */; };
 		8C2EA0881950909900E240FA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8C2EA0861950909900E240FA /* InfoPlist.strings */; };
 		8C2EA08A1950909900E240FA /* UIKitAnimationsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2EA0891950909900E240FA /* UIKitAnimationsTests.m */; };
+		8CFC358719509C3200E6CC35 /* MiVista.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CFC358619509C3200E6CC35 /* MiVista.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,8 @@
 		8C2EA0851950909900E240FA /* UIKitAnimationsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UIKitAnimationsTests-Info.plist"; sourceTree = "<group>"; };
 		8C2EA0871950909900E240FA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8C2EA0891950909900E240FA /* UIKitAnimationsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIKitAnimationsTests.m; sourceTree = "<group>"; };
+		8CFC358519509C3200E6CC35 /* MiVista.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MiVista.h; sourceTree = "<group>"; };
+		8CFC358619509C3200E6CC35 /* MiVista.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MiVista.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +122,8 @@
 				8C2EA0741950909900E240FA /* ViewController.m */,
 				8C2EA0761950909900E240FA /* Images.xcassets */,
 				8C2EA0651950909900E240FA /* Supporting Files */,
+				8CFC358519509C3200E6CC35 /* MiVista.h */,
+				8CFC358619509C3200E6CC35 /* MiVista.m */,
 			);
 			path = UIKitAnimations;
 			sourceTree = "<group>";
@@ -250,6 +255,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C2EA0751950909900E240FA /* ViewController.m in Sources */,
+				8CFC358719509C3200E6CC35 /* MiVista.m in Sources */,
 				8C2EA06F1950909900E240FA /* AppDelegate.m in Sources */,
 				8C2EA06B1950909900E240FA /* main.m in Sources */,
 			);
@@ -458,6 +464,7 @@
 				8C2EA08F1950909900E240FA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8C2EA0901950909900E240FA /* Build configuration list for PBXNativeTarget "UIKitAnimationsTests" */ = {
 			isa = XCConfigurationList;
@@ -466,6 +473,7 @@
 				8C2EA0921950909900E240FA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
