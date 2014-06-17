@@ -38,10 +38,6 @@
     self.amarillo.center = CGPointMake(120, 240);
     self.azul.center = CGPointMake(120, 360);
     
-    self.vista = [[MiVista alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
-    self.vista.center = CGPointMake(120, 480);
-    self.vista.backgroundColor = [UIColor orangeColor];
-    [self.view addSubview:self.vista];
     
 }
 
@@ -56,9 +52,19 @@
 
     [UIView animateWithDuration:1.0
                           delay:0.0
-                        options:UIViewAnimationOptionLayoutSubviews
+                        options:0
                      animations:^{
-                         self.vista.frame = CGRectMake(120, 480, 200, 200);
+                         self.rojo.center = CGPointMake(self.view.bounds.size.width-120, self.rojo.center.y);
+                         
+                         [UIView animateWithDuration:.5
+                                               delay:0
+                                             options:UIViewAnimationOptionOverrideInheritedDuration
+                                          animations:^{
+                                              self.amarillo.center = CGPointMake(self.view.bounds.size.width-120, self.amarillo.center.y);
+                                          }
+                                          completion:nil
+                          ];
+                         
                      }
                      completion:nil
      ];
