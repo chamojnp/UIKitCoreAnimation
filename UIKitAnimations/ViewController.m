@@ -14,9 +14,7 @@
 @property (nonatomic, strong) UIView* azul;
 @end
 
-@implementation ViewController {
-    BOOL dado;
-}
+@implementation ViewController
 
 - (UIView *) creaCuadradoDeColor:(UIColor *) color
 {
@@ -48,18 +46,12 @@
 }
 
 - (IBAction)doAnima:(id)sender {
-    CGPoint destino;
-    if(!dado) {
-        dado  = YES;
-        destino = CGPointMake(self.view.bounds.size.width-120, self.rojo.center.y);
-    } else {
-        destino = CGPointMake(self.view.bounds.size.width-120, self.view.bounds.size.height-120);
-    }
-    [UIView animateWithDuration:5.0
+
+    [UIView animateWithDuration:1.0
                           delay:0.0
-                        options:UIViewAnimationOptionBeginFromCurrentState
+                        options:UIViewAnimationOptionRepeat|UIViewAnimationOptionAutoreverse
                      animations:^{
-                         self.rojo.center = destino;
+                         self.rojo.center = CGPointMake(self.view.bounds.size.width-120, self.rojo.center.y);
                      }
                      completion:nil
      ];
