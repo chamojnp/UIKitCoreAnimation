@@ -35,8 +35,30 @@
     self.rojo.center = CGPointMake(120, 120);
     self.amarillo.center = CGPointMake(120, 240);
     self.azul.center = CGPointMake(120, 360);
+    
+    UIButton* boton = [[UIButton alloc] initWithFrame:CGRectMake(10, 10, 80, 30)];
+    [boton addTarget:self action:@selector(botonDado) forControlEvents:UIControlEventTouchUpInside];
+    [boton setTitle:@"DAME" forState:UIControlStateNormal];
+    [self.rojo addSubview:boton];
 }
 
+- (void) botonDado
+{
+    CGAffineTransform giro = CGAffineTransformMakeRotation(M_PI);
+    CGAffineTransform mueve = CGAffineTransformMakeTranslation(600, 0);
+    CGAffineTransform compuesta = CGAffineTransformConcat(giro, mueve);
+    
+    CGAffineTransform escala = CGAffineTransformIdentity;
+    escala = CGAffineTransformConcat( escala, CGAffineTransformMakeTranslation(50, 50));
+    escala = CGAffineTransformConcat( escala, CGAffineTransformMakeScale(3.0, 3.0));
+    escala = CGAffineTransformConcat( escala, CGAffineTransformMakeTranslation(-50, -50));
+
+    [UIView animateWithDuration:1.0
+                     animations:^{
+                         self.amarillo.transform = compuesta;
+                         self.azul.transform = escala;
+                     }];
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -46,34 +68,15 @@
 
 - (IBAction)doAnima:(id)sender {
     
-    CGAffineTransform giro = CGAffineTransformMakeRotation(M_PI);
-    CGAffineTransform mueve = CGAffineTransformMakeTranslation(600, 0);
-    CGAffineTransform compuesta = CGAffineTransformConcat(giro, mueve);
-    
-    CGAffineTransform escala = CGAffineTransformIdentity;
-    escala = CGAffineTransformConcat( escala, CGAffineTransformMakeTranslation(50, 50));
-    escala = CGAffineTransformConcat( escala, CGAffineTransformMakeScale(3.0, 3.0));
-    escala = CGAffineTransformConcat( escala, CGAffineTransformMakeTranslation(-50, -50));
-    
-    [UIView animateWithDuration:1.0
+    [UIView animateWithDuration:10.0
+                          delay:0.0
+                        options:0
+     
                      animations:^{
                          self.rojo.center = CGPointMake(self.view.bounds.size.width-120, self.rojo.center.y);
-                         self.amarillo.alpha = 0.2;
-                         self.amarillo.transform = escala;
-                     } completion:^(BOOL finished) {
-                         [UIView animateWithDuration:1.0 animations:^{
-                             self.rojo.center = CGPointMake(self.view.bounds.size.width-120, self.view.bounds.size.height-120);
-                         }];
-                     }];
-    
-    [UIView animateWithDuration:1.0
-                          delay:1.0
-                        options:0
-                     animations:^{
-                            self.azul.transform = compuesta;
-                            self.azul.backgroundColor = [UIColor greenColor];
-                        }
-                     completion:nil];
+                     }
+                     completion:nil
+     ];
 }
 
 @end
