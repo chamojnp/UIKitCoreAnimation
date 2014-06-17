@@ -9,21 +9,25 @@
 #import "ViewController.h"
 
 @interface ViewController ()
-@property (weak, nonatomic) IBOutlet UIView *vista;
-@property (weak, nonatomic) IBOutlet UIView *subvista;
-@property (weak, nonatomic) IBOutlet UILabel *label;
-@property (weak, nonatomic) IBOutlet UIView *vista2;
-
+@property (nonatomic, strong) UIView* rojo;
 @end
 
 @implementation ViewController
 
+- (UIView *) creaCuadradoDeColor:(UIColor *) color
+{
+    UIView* cuadrado = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+    cuadrado.backgroundColor = color;
+    [self.view addSubview:cuadrado];
+    return cuadrado;
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.vista2.hidden = YES;
-    
+
+    self.rojo = [self creaCuadradoDeColor:[UIColor redColor]];
+    self.rojo.center = CGPointMake(120, 120);
 }
 
 
@@ -34,13 +38,22 @@
 }
 
 - (IBAction)doAnima:(id)sender {
-    [UIView transitionFromView:self.subvista toView:self.vista2 duration:1.0
-                       options:UIViewAnimationOptionTransitionFlipFromTop|UIViewAnimationOptionShowHideTransitionViews|UIViewAnimationOptionAutoreverse
-                    completion:^(BOOL finished) {
-                        self.subvista.hidden = NO;
-                        self.vista2.hidden = YES;
-                    }];
-
+    float duracion = 1.0;
+    [UIView animateKeyframesWithDuration:duracion
+                                   delay:0.0
+                                 options:0
+                              animations:^{
+                                  [UIView addKeyframeWithRelativeStartTime:0
+                                                          relativeDuration:.5
+                                                                animations:^{
+                                                                    self.rojo.center = CGPointMake(self.view.bounds.size.width-120, self.rojo.center.y);
+                                                                }];
+                                  [UIView addKeyframeWithRelativeStartTime:.5
+                                                          relativeDuration:.5
+                                                                animations:^{
+                                                                    self.rojo.center = CGPointMake(self.view.bounds.size.width-120, self.view.bounds.size.height-120);
+                                                                }];
+                              } completion:nil];
 }
 
 @end
