@@ -60,8 +60,20 @@
                          self.rojo.center = CGPointMake(self.view.bounds.size.width-120, self.rojo.center.y);
                          self.amarillo.alpha = 0.2;
                          self.amarillo.transform = escala;
-                         self.azul.transform = compuesta;
+                     } completion:^(BOOL finished) {
+                         [UIView animateWithDuration:1.0 animations:^{
+                             self.rojo.center = CGPointMake(self.view.bounds.size.width-120, self.view.bounds.size.height-120);
+                         }];
                      }];
+    
+    [UIView animateWithDuration:1.0
+                          delay:1.0
+                        options:0
+                     animations:^{
+                            self.azul.transform = compuesta;
+                            self.azul.backgroundColor = [UIColor greenColor];
+                        }
+                     completion:nil];
 }
 
 @end
