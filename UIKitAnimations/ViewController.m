@@ -45,7 +45,12 @@
 }
 
 - (IBAction)doAnima:(id)sender {
-    
+    [UIView animateWithDuration:1.0
+                     animations:^{
+                         self.rojo.center = CGPointMake(self.view.bounds.size.width-120, self.rojo.center.y);
+                         self.amarillo.alpha = 0.0;
+                         self.azul.transform = CGAffineTransformMakeRotation(M_PI);
+                     }];
 }
 
 @end
