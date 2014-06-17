@@ -39,6 +39,14 @@
 
 - (IBAction)doAnima:(id)sender {
     self.rojo.transform = CGAffineTransformMakeRotation(M_PI);
+
+    [UIView performWithoutAnimation:^{
+        [self animaCosa];
+    }];
+}
+
+- (void) animaCosa
+{
     [UIView animateWithDuration:1.0
                           delay:0.0
          usingSpringWithDamping:.4
