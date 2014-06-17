@@ -13,7 +13,6 @@
 @property (nonatomic, strong) UIView* rojo;
 @property (nonatomic, strong) UIView* amarillo;
 @property (nonatomic, strong) UIView* azul;
-@property (nonatomic, strong) MiVista* vista;
 @end
 
 @implementation ViewController
@@ -38,11 +37,6 @@
     self.amarillo.center = CGPointMake(120, 240);
     self.azul.center = CGPointMake(120, 360);
     
-    self.vista = [[MiVista alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
-    self.vista.center = CGPointMake(120, 480);
-    self.vista.backgroundColor = [UIColor orangeColor];
-    [self.view addSubview:self.vista];
-    
 }
 
 
@@ -53,17 +47,27 @@
 }
 
 - (IBAction)doAnima:(id)sender {
-    [self.vista anima];
-
-    [UIView transitionWithView:self.vista
-                      duration:4.0
-                       options:UIViewAnimationOptionTransitionCurlUp|UIViewAnimationOptionAllowAnimatedContent
-                    animations:^{
-                        //self.vista.center = CGPointMake(self.view.bounds.size.width-120, self.view.center.y);
-                        self.vista.hidden = YES;
-
-                    } completion:nil];
-    
+    [UIView animateWithDuration:1.0
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseIn
+                     animations:^{
+                         self.rojo.center = CGPointMake(self.view.bounds.size.width-120, self.rojo.center.y);
+                     }
+                     completion:nil];
+    [UIView animateWithDuration:1.0
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseOut
+                     animations:^{
+                         self.amarillo.center = CGPointMake(self.view.bounds.size.width-120, self.amarillo.center.y);
+                     }
+                     completion:nil];
+    [UIView animateWithDuration:1.0
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveLinear
+                     animations:^{
+                         self.azul.center = CGPointMake(self.view.bounds.size.width-120, self.azul.center.y);
+                     }
+                     completion:nil];
 
 }
 
