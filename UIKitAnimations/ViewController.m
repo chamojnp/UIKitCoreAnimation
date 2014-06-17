@@ -14,7 +14,9 @@
 @property (nonatomic, strong) UIView* azul;
 @end
 
-@implementation ViewController
+@implementation ViewController {
+    BOOL dado;
+}
 
 - (UIView *) creaCuadradoDeColor:(UIColor *) color
 {
@@ -36,29 +38,8 @@
     self.amarillo.center = CGPointMake(120, 240);
     self.azul.center = CGPointMake(120, 360);
     
-    UIButton* boton = [[UIButton alloc] initWithFrame:CGRectMake(10, 10, 80, 30)];
-    [boton addTarget:self action:@selector(botonDado) forControlEvents:UIControlEventTouchUpInside];
-    [boton setTitle:@"DAME" forState:UIControlStateNormal];
-    [self.rojo addSubview:boton];
 }
 
-- (void) botonDado
-{
-    CGAffineTransform giro = CGAffineTransformMakeRotation(M_PI);
-    CGAffineTransform mueve = CGAffineTransformMakeTranslation(600, 0);
-    CGAffineTransform compuesta = CGAffineTransformConcat(giro, mueve);
-    
-    CGAffineTransform escala = CGAffineTransformIdentity;
-    escala = CGAffineTransformConcat( escala, CGAffineTransformMakeTranslation(50, 50));
-    escala = CGAffineTransformConcat( escala, CGAffineTransformMakeScale(3.0, 3.0));
-    escala = CGAffineTransformConcat( escala, CGAffineTransformMakeTranslation(-50, -50));
-
-    [UIView animateWithDuration:1.0
-                     animations:^{
-                         self.amarillo.transform = compuesta;
-                         self.azul.transform = escala;
-                     }];
-}
 
 - (void)didReceiveMemoryWarning
 {
@@ -67,13 +48,18 @@
 }
 
 - (IBAction)doAnima:(id)sender {
-    
-    [UIView animateWithDuration:10.0
+    CGPoint destino;
+    if(!dado) {
+        dado  = YES;
+        destino = CGPointMake(self.view.bounds.size.width-120, self.rojo.center.y);
+    } else {
+        destino = CGPointMake(self.view.bounds.size.width-120, self.view.bounds.size.height-120);
+    }
+    [UIView animateWithDuration:5.0
                           delay:0.0
-                        options:0
-     
+                        options:UIViewAnimationOptionBeginFromCurrentState
                      animations:^{
-                         self.rojo.center = CGPointMake(self.view.bounds.size.width-120, self.rojo.center.y);
+                         self.rojo.center = destino;
                      }
                      completion:nil
      ];
