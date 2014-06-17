@@ -18,24 +18,23 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.centro = [[UIView alloc] initWithFrame:CGRectInset(self.bounds, 20, 20)];
+        self.centro = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
         self.centro.backgroundColor = [UIColor redColor];
         [self addSubview:self.centro];
+        
+        [self anima];
     }
     return self;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
+- (void) anima
 {
-    // Drawing code
+    [UIView animateWithDuration:.5
+                          delay:0
+                        options:UIViewAnimationOptionRepeat|UIViewAnimationOptionAutoreverse|UIViewAnimationOptionOverrideInheritedDuration
+                     animations:^{
+                         self.centro.center = CGPointMake(self.bounds.size.width-10, 10);
+                     } completion:nil];
 }
-*/
 
-- (void)layoutSubviews
-{
-    self.centro.frame = CGRectInset(self.bounds, 20, 20);
-}
 @end
