@@ -45,11 +45,16 @@
 }
 
 - (IBAction)doAnima:(id)sender {
+    
+    CGAffineTransform giro = CGAffineTransformMakeRotation(M_PI);
+    CGAffineTransform mueve = CGAffineTransformMakeTranslation(600, 0);
+    CGAffineTransform compuesta = CGAffineTransformConcat(giro, mueve);
+    
     [UIView animateWithDuration:1.0
                      animations:^{
                          self.rojo.center = CGPointMake(self.view.bounds.size.width-120, self.rojo.center.y);
                          self.amarillo.alpha = 0.0;
-                         self.azul.transform = CGAffineTransformMakeRotation(M_PI);
+                         self.azul.transform = compuesta;
                      }];
 }
 
