@@ -40,25 +40,21 @@
 
 - (IBAction)doAnima:(id)sender {
 
-    // Animation 1
-    CAKeyframeAnimation* widthAnim = [CAKeyframeAnimation animationWithKeyPath:@"borderWidth"];
-    NSArray* widthValues = [NSArray arrayWithObjects:@1.0, @10.0, @5.0, @30.0, @0.5, @15.0, @2.0, @50.0, @0.0, nil];
-    widthAnim.values = widthValues;
-    widthAnim.calculationMode = kCAAnimationPaced;
+    CGRect oldBounds = self.view.bounds;
+    CGRect newBounds = CGRectInset(self.view.bounds, 100, 100);
     
-    // Animation 2
-    CAKeyframeAnimation* colorAnim = [CAKeyframeAnimation animationWithKeyPath:@"borderColor"];
-    NSArray* colorValues = [NSArray arrayWithObjects:(id)[UIColor greenColor].CGColor,
-                            (id)[UIColor redColor].CGColor, (id)[UIColor blueColor].CGColor,  nil];
-    colorAnim.values = colorValues;
-    colorAnim.calculationMode = kCAAnimationPaced;
-    
-    // Animation group
-    CAAnimationGroup* group = [CAAnimationGroup animation];
-    group.animations = [NSArray arrayWithObjects:colorAnim, widthAnim, nil];
-    group.duration = 5.0;
-    
-    [self.rojo addAnimation:group forKey:@"BorderChanges"];
+    [UIView animateWithDuration:1.0 animations:^{
+        // Change the opacity implicitly.
+        self.view.layer.opacity = 0.0;
+        
+        // Change the position explicitly.
+        CABasicAnimation* theAnim = [CABasicAnimation animationWithKeyPath:@"bounds"];
+        theAnim.fromValue = [NSValue valueWithCGRect:oldBounds];
+        theAnim.toValue = [NSValue valueWithCGRect:newBounds];
+        theAnim.duration = 3.0;
+        [self.view.layer addAnimation:theAnim forKey:@"AnimateFrame"];
+    }];
+
     
 }
 
