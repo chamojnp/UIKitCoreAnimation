@@ -13,10 +13,7 @@
 @property (nonatomic, strong) CALayer* verde;
 @end
 
-@implementation ViewController {
-    BOOL anim;
-}
-
+@implementation ViewController
 - (CALayer *) creaCuadradoDeColor:(UIColor *) color
 {
     CALayer* cuadrado = [CALayer layer];
@@ -31,7 +28,7 @@
     [super viewDidLoad];
 
     self.rojo = [self creaCuadradoDeColor:[UIColor redColor]];
-    self.rojo.position = CGPointMake(300, 300);
+    self.rojo.position = CGPointMake(60, 60);
     /*/
     CGRect rojoFrame = self.rojo.frame;
     self.rojo.anchorPoint = CGPointMake(0, 0);
@@ -47,20 +44,15 @@
 }
 
 - (IBAction)doAnima:(id)sender {
-    if(!anim) {
-        anim = YES;
-        
-        CGPoint pos = self.rojo.position;
-        self.rojo.position = CGPointMake(self.view.bounds.size.width-100, self.rojo.position.y);
-        
-        CABasicAnimation* mueveAnima = [CABasicAnimation animationWithKeyPath:@"position"];
-        mueveAnima.fromValue = [NSValue valueWithCGPoint:pos];
-        mueveAnima.toValue = [NSValue valueWithCGPoint:CGPointMake(self.view.bounds.size.width-100, self.rojo.position.y)];
-        mueveAnima.duration = 10.0;
-        [self.rojo addAnimation:mueveAnima forKey:@"mueve"];
-    } else {
-        [self.rojo removeAnimationForKey:@"mueve"];
-    }
+    self.rojo.position = CGPointMake(60, 60);
+    
+    NSArray* values = @[[NSValue valueWithCGPoint:CGPointMake(60, 60)], [NSValue valueWithCGPoint:CGPointMake(self.view.bounds.size.width-60, 60)], [NSValue valueWithCGPoint:CGPointMake(self.view.bounds.size.width-60, self.view.bounds.size.height-60)], [NSValue valueWithCGPoint:CGPointMake(60, self.view.bounds.size.height-60)], [NSValue valueWithCGPoint:CGPointMake(60, 60)]];
+    NSArray* keyTimes = @[@0, @.7, @.8, @.9, @1];
+    CAKeyframeAnimation* anim = [CAKeyframeAnimation animationWithKeyPath:@"position"];
+    anim.values = values;
+    anim.keyTimes = keyTimes;
+    anim.duration = 3.0;
+    [self.rojo addAnimation:anim forKey:@"mueve"];
     
 }
 
