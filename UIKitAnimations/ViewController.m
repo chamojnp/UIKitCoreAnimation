@@ -13,7 +13,9 @@
 @property (nonatomic, strong) CALayer* verde;
 @end
 
-@implementation ViewController
+@implementation ViewController {
+    BOOL anim;
+}
 
 - (CALayer *) creaCuadradoDeColor:(UIColor *) color
 {
@@ -45,15 +47,20 @@
 }
 
 - (IBAction)doAnima:(id)sender {
-    CGPoint pos = self.rojo.position;
-    self.rojo.position = CGPointMake(self.view.bounds.size.width-100, self.rojo.position.y);
-    
-    CABasicAnimation* fadeAnim = [CABasicAnimation animationWithKeyPath:@"position"];
-    fadeAnim.fromValue = [NSValue valueWithCGPoint:pos];
-    fadeAnim.toValue = [NSValue valueWithCGPoint:CGPointMake(self.view.bounds.size.width-100, self.rojo.position.y)];
-    fadeAnim.duration = 1.0;
-    [self.rojo addAnimation:fadeAnim forKey:@"rojoOpacity"];
-    
+    if(!anim) {
+        anim = YES;
+        
+        CGPoint pos = self.rojo.position;
+        self.rojo.position = CGPointMake(self.view.bounds.size.width-100, self.rojo.position.y);
+        
+        CABasicAnimation* mueveAnima = [CABasicAnimation animationWithKeyPath:@"position"];
+        mueveAnima.fromValue = [NSValue valueWithCGPoint:pos];
+        mueveAnima.toValue = [NSValue valueWithCGPoint:CGPointMake(self.view.bounds.size.width-100, self.rojo.position.y)];
+        mueveAnima.duration = 10.0;
+        [self.rojo addAnimation:mueveAnima forKey:@"mueve"];
+    } else {
+        [self.rojo removeAnimationForKey:@"mueve"];
+    }
     
 }
 
