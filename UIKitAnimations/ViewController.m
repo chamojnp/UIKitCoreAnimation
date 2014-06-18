@@ -9,16 +9,17 @@
 #import "ViewController.h"
 
 @interface ViewController ()
-@property (nonatomic, strong) UIView* rojo;
+@property (nonatomic, strong) CALayer* rojo;
 @end
 
 @implementation ViewController
 
-- (UIView *) creaCuadradoDeColor:(UIColor *) color
+- (CALayer *) creaCuadradoDeColor:(UIColor *) color
 {
-    UIView* cuadrado = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
-    cuadrado.backgroundColor = color;
-    [self.view addSubview:cuadrado];
+    CALayer* cuadrado = [CALayer layer];
+    cuadrado.frame = CGRectMake(0, 0, 100, 100);
+    cuadrado.backgroundColor = color.CGColor;
+    [self.view.layer addSublayer:cuadrado];
     return cuadrado;
 }
 
@@ -27,7 +28,7 @@
     [super viewDidLoad];
 
     self.rojo = [self creaCuadradoDeColor:[UIColor redColor]];
-    self.rojo.center = CGPointMake(120, 120);
+    self.rojo.position = CGPointMake(0, 0);
 }
 
 
@@ -38,24 +39,11 @@
 }
 
 - (IBAction)doAnima:(id)sender {
-    self.rojo.transform = CGAffineTransformMakeRotation(M_PI);
-
-    [UIView performWithoutAnimation:^{
-        [self animaCosa];
-    }];
+    NSLog(@"position: %@", NSStringFromCGPoint(self.rojo.position));
+    self.rojo.anchorPoint = CGPointMake(0, 0);
+    NSLog(@"position: %@", NSStringFromCGPoint(self.rojo.position));
 }
 
-- (void) animaCosa
-{
-    [UIView animateWithDuration:1.0
-                          delay:0.0
-         usingSpringWithDamping:.4
-          initialSpringVelocity:.8
-                        options:0
-                     animations:^{
-                         self.rojo.center = CGPointMake(self.view.bounds.size.width-120, self.rojo.center.y);
-                         self.rojo.transform = CGAffineTransformIdentity;
-                     } completion:nil];
-}
+
 
 @end
