@@ -10,6 +10,7 @@
 
 @interface ViewController ()
 @property (nonatomic, strong) CALayer* rojo;
+@property (nonatomic, strong) CALayer* verde;
 @end
 
 @implementation ViewController
@@ -17,7 +18,7 @@
 - (CALayer *) creaCuadradoDeColor:(UIColor *) color
 {
     CALayer* cuadrado = [CALayer layer];
-    cuadrado.frame = CGRectMake(0, 0, 100, 100);
+    cuadrado.frame = CGRectMake(0, 0, 120, 120);
     cuadrado.backgroundColor = color.CGColor;
     [self.view.layer addSublayer:cuadrado];
     return cuadrado;
@@ -28,7 +29,12 @@
     [super viewDidLoad];
 
     self.rojo = [self creaCuadradoDeColor:[UIColor redColor]];
-    self.rojo.position = CGPointMake(0, 0);
+    self.rojo.position = CGPointMake(300, 300);
+    /*/
+    CGRect rojoFrame = self.rojo.frame;
+    self.rojo.anchorPoint = CGPointMake(0, 0);
+    self.rojo.frame = rojoFrame;
+    //*/
 }
 
 
@@ -39,9 +45,16 @@
 }
 
 - (IBAction)doAnima:(id)sender {
-    NSLog(@"position: %@", NSStringFromCGPoint(self.rojo.position));
-    self.rojo.anchorPoint = CGPointMake(0, 0);
-    NSLog(@"position: %@", NSStringFromCGPoint(self.rojo.position));
+    CGPoint pos = self.rojo.position;
+    self.rojo.position = CGPointMake(self.view.bounds.size.width-100, self.rojo.position.y);
+    
+    CABasicAnimation* fadeAnim = [CABasicAnimation animationWithKeyPath:@"position"];
+    fadeAnim.fromValue = [NSValue valueWithCGPoint:pos];
+    fadeAnim.toValue = [NSValue valueWithCGPoint:CGPointMake(self.view.bounds.size.width-100, self.rojo.position.y)];
+    fadeAnim.duration = 1.0;
+    [self.rojo addAnimation:fadeAnim forKey:@"rojoOpacity"];
+    
+    
 }
 
 
