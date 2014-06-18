@@ -28,12 +28,8 @@
     [super viewDidLoad];
 
     self.rojo = [self creaCuadradoDeColor:[UIColor redColor]];
+    self.rojo.affineTransform = CGAffineTransformMakeRotation(M_PI/4.0);
     self.rojo.position = CGPointMake(60, 60);
-    /*/
-    CGRect rojoFrame = self.rojo.frame;
-    self.rojo.anchorPoint = CGPointMake(0, 0);
-    self.rojo.frame = rojoFrame;
-    //*/
 }
 
 
@@ -45,15 +41,14 @@
 
 - (IBAction)doAnima:(id)sender {
 
-    NSArray* values = @[[NSValue valueWithCGPoint:CGPointMake(60, 60)], [NSValue valueWithCGPoint:CGPointMake(self.view.bounds.size.width-60, 60)], [NSValue valueWithCGPoint:CGPointMake(self.view.bounds.size.width-60, self.view.bounds.size.height-60)], [NSValue valueWithCGPoint:CGPointMake(60, self.view.bounds.size.height-60)], [NSValue valueWithCGPoint:CGPointMake(60, 60)]];
-    NSArray* keyTimes = @[@0, @.25, @.5, @.75, @1];
-    NSArray* timingFunctions = @[[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut], [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut], [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut], [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+    CGPathRef path = CGPathCreateWithEllipseInRect(CGRectInset(self.view.bounds, 100, 100), NULL);
+    
+    
     CAKeyframeAnimation* anim = [CAKeyframeAnimation animationWithKeyPath:@"position"];
-    anim.values = values;
-    anim.keyTimes = keyTimes;
-    anim.timingFunctions = timingFunctions;
+    anim.path = path;
     anim.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
     anim.calculationMode = kCAAnimationCubicPaced;
+    anim.rotationMode = kCAAnimationRotateAutoReverse;
 
     anim.duration = 3.0;
     [self.rojo addAnimation:anim forKey:@"mueve"];
