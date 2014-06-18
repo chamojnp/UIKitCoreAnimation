@@ -14,6 +14,7 @@
 @end
 
 @implementation ViewController
+
 - (CALayer *) creaCuadradoDeColor:(UIColor *) color
 {
     CALayer* cuadrado = [CALayer layer];
@@ -38,24 +39,15 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+
 - (IBAction)doAnima:(id)sender {
 
-    CGRect oldBounds = self.view.bounds;
-    CGRect newBounds = CGRectInset(self.view.bounds, 100, 100);
-    
-    [UIView animateWithDuration:1.0 animations:^{
-        // Change the opacity implicitly.
-        self.view.layer.opacity = 0.0;
-        
-        // Change the position explicitly.
-        CABasicAnimation* theAnim = [CABasicAnimation animationWithKeyPath:@"bounds"];
-        theAnim.fromValue = [NSValue valueWithCGRect:oldBounds];
-        theAnim.toValue = [NSValue valueWithCGRect:newBounds];
-        theAnim.duration = 3.0;
-        [self.view.layer addAnimation:theAnim forKey:@"AnimateFrame"];
-    }];
-
-    
+    [CATransaction begin];
+//    [CATransaction setValue:[NSNumber numberWithFloat:10.0f] forKey:kCATransactionAnimationDuration];
+    [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
+    self.rojo.position = CGPointMake(1000, 300);
+    [CATransaction commit];
 }
 
 
