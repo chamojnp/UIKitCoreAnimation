@@ -47,10 +47,13 @@
     self.rojo.position = CGPointMake(60, 60);
     
     NSArray* values = @[[NSValue valueWithCGPoint:CGPointMake(60, 60)], [NSValue valueWithCGPoint:CGPointMake(self.view.bounds.size.width-60, 60)], [NSValue valueWithCGPoint:CGPointMake(self.view.bounds.size.width-60, self.view.bounds.size.height-60)], [NSValue valueWithCGPoint:CGPointMake(60, self.view.bounds.size.height-60)], [NSValue valueWithCGPoint:CGPointMake(60, 60)]];
-    NSArray* keyTimes = @[@0, @.7, @.8, @.9, @1];
+    NSArray* keyTimes = @[@0, @.25, @.5, @.75, @1];
+    NSArray* timingFunctions = @[[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut], [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut], [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut], [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
     CAKeyframeAnimation* anim = [CAKeyframeAnimation animationWithKeyPath:@"position"];
     anim.values = values;
     anim.keyTimes = keyTimes;
+    anim.timingFunctions = timingFunctions;
+//    anim.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
     anim.duration = 3.0;
     [self.rojo addAnimation:anim forKey:@"mueve"];
     
