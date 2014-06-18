@@ -28,8 +28,7 @@
     [super viewDidLoad];
 
     self.rojo = [self creaCuadradoDeColor:[UIColor redColor]];
-    self.rojo.affineTransform = CGAffineTransformMakeRotation(M_PI/4.0);
-    self.rojo.position = CGPointMake(60, 60);
+    self.rojo.position = CGPointMake(300, 300);
 }
 
 
@@ -41,17 +40,25 @@
 
 - (IBAction)doAnima:(id)sender {
 
-    CGPathRef path = CGPathCreateWithEllipseInRect(CGRectInset(self.view.bounds, 100, 100), NULL);
+    // Animation 1
+    CAKeyframeAnimation* widthAnim = [CAKeyframeAnimation animationWithKeyPath:@"borderWidth"];
+    NSArray* widthValues = [NSArray arrayWithObjects:@1.0, @10.0, @5.0, @30.0, @0.5, @15.0, @2.0, @50.0, @0.0, nil];
+    widthAnim.values = widthValues;
+    widthAnim.calculationMode = kCAAnimationPaced;
     
+    // Animation 2
+    CAKeyframeAnimation* colorAnim = [CAKeyframeAnimation animationWithKeyPath:@"borderColor"];
+    NSArray* colorValues = [NSArray arrayWithObjects:(id)[UIColor greenColor].CGColor,
+                            (id)[UIColor redColor].CGColor, (id)[UIColor blueColor].CGColor,  nil];
+    colorAnim.values = colorValues;
+    colorAnim.calculationMode = kCAAnimationPaced;
     
-    CAKeyframeAnimation* anim = [CAKeyframeAnimation animationWithKeyPath:@"position"];
-    anim.path = path;
-    anim.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-    anim.calculationMode = kCAAnimationCubicPaced;
-    anim.rotationMode = kCAAnimationRotateAutoReverse;
-
-    anim.duration = 3.0;
-    [self.rojo addAnimation:anim forKey:@"mueve"];
+    // Animation group
+    CAAnimationGroup* group = [CAAnimationGroup animation];
+    group.animations = [NSArray arrayWithObjects:colorAnim, widthAnim, nil];
+    group.duration = 5.0;
+    
+    [self.rojo addAnimation:group forKey:@"BorderChanges"];
     
 }
 
