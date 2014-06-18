@@ -11,6 +11,8 @@
 @interface ViewController ()
 @property (nonatomic, strong) CALayer* rojo;
 @property (nonatomic, strong) CALayer* verde;
+@property (weak, nonatomic) IBOutlet UIView *menuView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *verticalSpace;
 @end
 
 @implementation ViewController
@@ -27,9 +29,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    self.rojo = [self creaCuadradoDeColor:[UIColor redColor]];
-    self.rojo.position = CGPointMake(300, 300);
 }
 
 
@@ -42,12 +41,15 @@
 
 
 - (IBAction)doAnima:(id)sender {
+    
+    CGRect frameFinal = self.menuView.frame;
+    frameFinal.origin.y = 0;
 
-    [CATransaction begin];
-//    [CATransaction setValue:[NSNumber numberWithFloat:10.0f] forKey:kCATransactionAnimationDuration];
-    [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
-    self.rojo.position = CGPointMake(1000, 300);
-    [CATransaction commit];
+    [UIView animateWithDuration:1.0
+                     animations:^{
+                         self.verticalSpace.constant = 0;
+                         [self.view layoutIfNeeded];
+                     }];
 }
 
 
